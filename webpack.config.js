@@ -22,7 +22,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '../css/style.css',
+            filename: '../css/style.css'
         }),
         new CleanWebpackPlugin()
       ],
