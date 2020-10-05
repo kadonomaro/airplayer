@@ -1,4 +1,4 @@
-import { IAudioFile } from '../interfaces/IAudioFile';
+import IAudioFile from '../interfaces/IAudioFile';
 
 export default class Playlist {
     readonly list: Array<IAudioFile> = [];
