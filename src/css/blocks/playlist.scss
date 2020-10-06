@@ -1,0 +1,27 @@
+.playlist {
+    max-width: 600px;
+    margin: 0 auto;
+    &__list {
+        list-style: none;
+    }
+    &__item {
+        margin-bottom: 10px;
+    }
+}
+
+.playlist-item {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &__name, 
+    &__duration {
+        display: block;
+        pointer-events: none;
+    }
+    &__name {
+
+    }
+    &__duration {
+
+    }
+}
