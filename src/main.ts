@@ -1,4 +1,5 @@
 import '@/css/style.scss';
+import AudioPlayer from './components/AudioPlayer';
 import Playlist from './components/Playlist';
 import Render from './components/Render';
 import IAudioFile from './interfaces/IAudioFile';
@@ -9,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	const fileInputElement = document.querySelector('.js-input-file') as HTMLInputElement;
 	const audioElement = document.querySelector('.js-audio') as HTMLAudioElement;
 	const playlistElement = document.querySelector('.js-playlist') as HTMLDivElement;
+
 	const playlist = new Playlist();
 	const render = new Render(playlistElement);
+	const player = new AudioPlayer(audioElement);
 
 	fileInputElement.addEventListener('change', function (evt: Event) {
 		const target = evt.target as HTMLInputElement;
@@ -35,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.addEventListener('click', function (evt: Event) {
 		const target = evt.target as HTMLElement;
 		if (target.dataset.audioId) {
-			audioElement.src = playlist.list[+target.dataset.audioId].src;
-			audioElement.play();
+			player.addSound(playlist.list[+target.dataset.audioId]);
+			player.play();
 		}
 	});
 });
