@@ -10,16 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	const fileInputElement = document.querySelector('.js-input-file') as HTMLInputElement;
 	const audioElement = document.querySelector('.js-audio') as HTMLAudioElement;
 	const playlistElement = document.querySelector('.js-playlist') as HTMLDivElement;
-	const playButton = document.querySelector('.js-player-play') as HTMLButtonElement;
-	const pauseButton = document.querySelector('.js-player-pause') as HTMLButtonElement;
-	const stopButton = document.querySelector('.js-player-stop') as HTMLButtonElement;
+
+	const progressBar = document.querySelector('.js-progress-bar') as HTMLDivElement;
+	const progressStart = document.querySelector('.js-progress-start') as HTMLDivElement;
+	const progressEnd = document.querySelector('.js-progress-end') as HTMLDivElement;
 
 	const playlist = new Playlist();
 	const render = new Render(playlistElement);
 	const player = new AudioPlayer(audioElement, {
-		playButton,
-		pauseButton,
-		stopButton
+		playButton: document.querySelector('.js-player-play') as HTMLButtonElement,
+		pauseButton: document.querySelector('.js-player-pause') as HTMLButtonElement,
+		stopButton: document.querySelector('.js-player-stop') as HTMLButtonElement
 	});
 
 

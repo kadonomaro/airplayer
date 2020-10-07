@@ -11,11 +11,28 @@
     <audio class="js-audio" src=""></audio>
 
     <div class="player">
-        <div class="player__controls">
-            <button class="player__button js-player-play">Play</button>
-            <button class="player__button js-player-pause">Pause</button>
-            <button class="player__button js-player-stop">Stop</button>
+        <div class="player__progress">
+            <div class="progress">
+                <div class="progress__bar js-progress-bar"></div>
+                <div class="progress__info">
+                    <span class="progress__start js-progress-start">0</span>
+                    <span class="progress__end js-progress-end">3</span>
+                </div>
+            </div>
         </div>
+        <div class="player__body">
+            <div class="player__controls player__col">
+                <button class="player__button player__button--prev js-player-prev">Prev</button>
+                <button class="player__button player__button--play js-player-play">Play</button>
+                <button class="player__button player__button--pause js-player-pause">Pause</button>
+                <button class="player__button player__button--stop js-player-stop">Stop</button>
+                <button class="player__button player__button--next js-player-next">Next</button>
+            </div>
+            <div class="player__info player__col">
+                <span class="player__name">Название трека</span>
+            </div>
+        </div>
+
     </div>
 
     <div class="playlist">
