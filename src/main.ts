@@ -10,10 +10,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	const fileInputElement = document.querySelector('.js-input-file') as HTMLInputElement;
 	const audioElement = document.querySelector('.js-audio') as HTMLAudioElement;
 	const playlistElement = document.querySelector('.js-playlist') as HTMLDivElement;
+	const playButton = document.querySelector('.js-player-play') as HTMLButtonElement;
+	const pauseButton = document.querySelector('.js-player-pause') as HTMLButtonElement;
+	const stopButton = document.querySelector('.js-player-stop') as HTMLButtonElement;
 
 	const playlist = new Playlist();
 	const render = new Render(playlistElement);
-	const player = new AudioPlayer(audioElement);
+	const player = new AudioPlayer(audioElement, {
+		playButton,
+		pauseButton,
+		stopButton
+	});
+
 
 	fileInputElement.addEventListener('change', function (evt: Event) {
 		const target = evt.target as HTMLInputElement;
@@ -35,11 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	});
 
+
 	document.addEventListener('click', function (evt: Event) {
 		const target = evt.target as HTMLElement;
 		if (target.dataset.audioId) {
 			player.addSound(playlist.list[+target.dataset.audioId]);
-			player.play();
 		}
 	});
+
+
+
+
 });
