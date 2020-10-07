@@ -8,16 +8,16 @@ export default class Render {
 	}
 
 	update(list: Array<IAudioFile>) {
-		this.root.innerHTML = '';
-		list.forEach((item, index) => {
-			this.root.insertAdjacentHTML('beforeend', `
-                <li class="playlist__item">
-                	<div class="playlist-item" data-audio-id="${index}">
-                        <span class="playlist-item__name">${item.name}</span>
-                        <span class="playlist-item__name">${item.duration}</span>
-                    </div>
-                </li>
-            `);
-		});
+		const items = list.map((item, index) => {
+			return `
+			<li class="playlist__item">
+				<div class="playlist-item" data-audio-id="${index}">
+					<span class="playlist-item__name">${item.name}</span>
+					<span class="playlist-item__name">${item.duration}</span>
+				</div>
+			</li>
+			`
+		}).join('');
+		this.root.innerHTML = items;
 	}
 }

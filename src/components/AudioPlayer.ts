@@ -27,7 +27,6 @@ export default class AudioPlayer {
 	}
 
 	play() {
-		console.log(this);
 		this.audioElement.play();
 	}
 
