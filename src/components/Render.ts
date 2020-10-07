@@ -13,7 +13,10 @@ export default class Render {
 			<li class="playlist__item">
 				<div class="playlist-item" data-audio-id="${index}">
 					<span class="playlist-item__name">${item.name}</span>
-					<span class="playlist-item__name">${item.duration}</span>
+					<span class="playlist-item__duration">${item.duration}</span>
+					<div class="playlist-item__controls">
+						<button class="js-remove-track">Remove</button>
+					</div>
 				</div>
 			</li>
 			`
