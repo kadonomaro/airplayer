@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	const progressStart = document.querySelector('.js-progress-start') as HTMLDivElement;
 	const progressEnd = document.querySelector('.js-progress-end') as HTMLDivElement;
 
+	const playerName = document.querySelector('.js-player-name') as HTMLSpanElement;
+
 	const playlist = new Playlist();
 	const render = new Render(playlistElement);
 	const player = new AudioPlayer(audioElement, {
@@ -48,7 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.addEventListener('click', function (evt: Event) {
 		const target = evt.target as HTMLElement;
 		if (target.dataset.audioId) {
-			player.addSound(playlist.list[+target.dataset.audioId]);
+			player.sound = playlist.list[+target.dataset.audioId];
+			playerName.textContent = player.sound.name;
+			progressEnd.textContent = player.sound.duration.toString();
 		}
 	});
 

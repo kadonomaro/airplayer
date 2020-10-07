@@ -9,10 +9,12 @@ interface IControls {
 export default class AudioPlayer {
 	private audioElement: HTMLAudioElement;
 	private controls: IControls;
+	private _sound: IAudioFile | null;
 
 	constructor(audioElement: HTMLAudioElement, controls: IControls) {
 		this.audioElement = audioElement;
 		this.controls = controls;
+		this._sound = null;
 		this.setup();
 	}
 
@@ -22,20 +24,31 @@ export default class AudioPlayer {
 		this.controls.stopButton.addEventListener('click', this.stop.bind(this));
 	}
 
-	addSound(sound: IAudioFile) {
-		this.audioElement.src = sound.src;
+	get sound(): IAudioFile | null {
+		return this._sound;
+	}
+
+	set sound(sound: IAudioFile | null) {
+		this._sound = sound;
+		this.audioElement.src = this._sound?.src!;
 	}
 
 	play() {
-		this.audioElement.play();
+		if (this._sound?.src) {
+			this.audioElement.play();
+		}
 	}
 
 	pause() {
-		this.audioElement.pause();
+		if (this._sound?.src) {
+			this.audioElement.pause();
+		}
 	}
 
 	stop() {
-		this.pause();
-		this.audioElement.currentTime = 0;
+		if (this._sound?.src) {
+			this.pause();
+			this.audioElement.currentTime = 0;
+		}
 	}
 }
