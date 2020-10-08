@@ -18,8 +18,6 @@ export default class Playlist {
         const index = this.list.findIndex(item => item.id === sound.id);
         this.index = index;
         this._current = this.list[this.index];
-        console.log(this._current);
-        console.log(this.index);
     }
 
     add(audio: IAudioFile) {

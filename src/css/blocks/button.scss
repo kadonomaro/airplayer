@@ -1,0 +1,31 @@
+.button {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    background-size: 35%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.1s ease-in;
+    &:hover {
+        background-color: #ebebeb;
+    }
+}
+.button--play {
+    background-image: url('~@/assets/icons/play-icon.svg');
+}
+.button--pause {
+    background-image: url('~@/assets/icons/pause-icon.svg');
+}
+.button--stop {
+    background-image: url('~@/assets/icons/stop-icon.svg');
+}
+.button--prev {
+    background-image: url('~@/assets/icons/prev-icon.svg');
+}
+.button--next {
+    background-image: url('~@/assets/icons/next-icon.svg');
+}
