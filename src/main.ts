@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	const playlistElement = document.querySelector('.js-playlist') as HTMLDivElement;
 
 	const progressBar = document.querySelector('.js-progress-bar') as HTMLDivElement;
-	const progressStart = document.querySelector('.js-progress-start') as HTMLDivElement;
 	const progressEnd = document.querySelector('.js-progress-end') as HTMLDivElement;
 
 	const playerName = document.querySelector('.js-player-name') as HTMLSpanElement;
@@ -56,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 			target.classList.add('playlist-item--active');
 
-			player.sound = playlist.list[+target.dataset.audioId];
+			playlist.current = playlist.list.find(item => item.id === target.dataset.audioId)!;
+			player.sound = playlist.current;
 			playerName.textContent = player.sound.name;
 			progressEnd.textContent = player.sound.duration.toString();
 		}
