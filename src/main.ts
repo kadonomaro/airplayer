@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		const target = evt.target as HTMLInputElement;
 		const files: FileList = target.files!;
 		const promises: any = [];
-		Array.from(files).forEach(file => {
+		Array.from(files).forEach((file, index) => {
 			const fileInfo: IAudioFile = {
+				id: ((+new Date) * index).toString(36),
 				name: file.name,
 				src: URL.createObjectURL(file),
 				duration: 0
@@ -60,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			progressEnd.textContent = player.sound.duration.toString();
 		}
 		if (target.classList.contains('js-remove-track')) {
-			console.log('remove');
+			const parent = target.closest('[data-audio-id]') as HTMLElement;
+			playlist.remove(parent.dataset.audioId);
+			render.update(playlist.list);
 		}
 	});
 
