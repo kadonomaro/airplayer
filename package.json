@@ -1,5 +1,5 @@
 {
-  "name": "todo-list-2020",
+  "name": "airplayer",
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack --mode development",
