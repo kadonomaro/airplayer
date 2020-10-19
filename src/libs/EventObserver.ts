@@ -12,7 +12,7 @@ export default class EventObserver {
 		this.observers = this.observers.filter(subscriber => subscriber !== fn);
 	}
 
-	broadcast(data: any) {
+	broadcast(data: any): void {
 		this.observers.forEach(subscriber => subscriber(data));
 	}
 }

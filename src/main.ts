@@ -3,6 +3,7 @@ import AudioPlayer from './components/AudioPlayer';
 import Playlist from './components/Playlist';
 import Render from './components/Render';
 import IAudioFile from './interfaces/IAudioFile';
+import EventObserver from './libs/EventObserver';
 import { duration } from './utils/audio';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -22,6 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		playButton: document.querySelector('.js-player-play') as HTMLButtonElement,
 		pauseButton: document.querySelector('.js-player-pause') as HTMLButtonElement,
 		stopButton: document.querySelector('.js-player-stop') as HTMLButtonElement
+	});
+
+	const soundObserver = new EventObserver();
+	soundObserver.subscribe((sound: IAudioFile) => {
+		player.sound = sound;
+		playerName.textContent = sound.name;
+		progressEnd.textContent = sound.duration.toString();
 	});
 
 
@@ -54,11 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				item.classList.remove('playlist-item--active');
 			});
 			target.classList.add('playlist-item--active');
-
 			playlist.current = playlist.list.find(item => item.id === target.dataset.audioId)!;
-			player.sound = playlist.current;
-			playerName.textContent = player.sound.name;
-			progressEnd.textContent = player.sound.duration.toString();
+			soundObserver.broadcast(playlist.current);
 		}
 		if (target.classList.contains('js-remove-track')) {
 			const parent = target.closest('[data-audio-id]') as HTMLElement;
@@ -66,8 +71,5 @@ document.addEventListener('DOMContentLoaded', function () {
 			render.update(playlist.list);
 		}
 	});
-
-
-
 
 });

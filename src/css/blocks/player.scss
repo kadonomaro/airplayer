@@ -1,17 +1,15 @@
 .player {
-    padding: 20px 0;
-    &__controls {
-
-    }
-    &__body {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-    }
-    &__col {
-        padding: 0 10px;
-    }
-    &__button {
-
-    }
+	padding: 20px 0;
+	&__controls {
+	}
+	&__body {
+		display: flex;
+		align-items: center;
+		padding: 10px 0;
+	}
+	&__col {
+		padding: 0 10px;
+	}
+	&__button {
+	}
 }
