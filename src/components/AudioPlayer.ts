@@ -3,17 +3,25 @@ import IAudioFile from "../interfaces/IAudioFile";
 interface IControls {
 	playButton: HTMLButtonElement,
 	pauseButton: HTMLButtonElement,
-	stopButton: HTMLButtonElement
+	stopButton: HTMLButtonElement,
+	prevButton: HTMLButtonElement,
+	nextButton: HTMLButtonElement
+}
+
+interface IAudioInfo {
+	trackName: HTMLSpanElement
 }
 
 export default class AudioPlayer {
 	private audioElement: HTMLAudioElement;
 	private controls: IControls;
+	public info: IAudioInfo;
 	private _sound: IAudioFile | null;
 
-	constructor(audioElement: HTMLAudioElement, controls: IControls) {
+	constructor(audioElement: HTMLAudioElement, controls: IControls, info: IAudioInfo) {
 		this.audioElement = audioElement;
 		this.controls = controls;
+		this.info = info;
 		this._sound = null;
 		this.setup();
 	}
@@ -22,6 +30,8 @@ export default class AudioPlayer {
 		this.controls.playButton.addEventListener('click', this.play.bind(this));
 		this.controls.pauseButton.addEventListener('click', this.pause.bind(this));
 		this.controls.stopButton.addEventListener('click', this.stop.bind(this));
+		this.controls.nextButton.addEventListener('click', this.next.bind(this));
+		this.controls.prevButton.addEventListener('click', this.prev.bind(this));
 	}
 
 	get sound(): IAudioFile | null {
@@ -50,5 +60,13 @@ export default class AudioPlayer {
 			this.pause();
 			this.audioElement.currentTime = 0;
 		}
+	}
+
+	prev() {
+
+	}
+
+	next() {
+
 	}
 }

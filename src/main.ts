@@ -15,20 +15,22 @@ document.addEventListener('DOMContentLoaded', function () {
 	const progressBar = document.querySelector('.js-progress-bar') as HTMLDivElement;
 	const progressEnd = document.querySelector('.js-progress-end') as HTMLDivElement;
 
-	const playerName = document.querySelector('.js-player-name') as HTMLSpanElement;
-
 	const playlist = new Playlist();
 	const render = new Render(playlistElement);
 	const player = new AudioPlayer(audioElement, {
 		playButton: document.querySelector('.js-player-play') as HTMLButtonElement,
 		pauseButton: document.querySelector('.js-player-pause') as HTMLButtonElement,
-		stopButton: document.querySelector('.js-player-stop') as HTMLButtonElement
+		stopButton: document.querySelector('.js-player-stop') as HTMLButtonElement,
+		prevButton: document.querySelector('.js-player-prev') as HTMLButtonElement,
+		nextButton: document.querySelector('.js-player-next') as HTMLButtonElement
+	}, {
+		trackName: document.querySelector('.js-player-name') as HTMLSpanElement
 	});
 
 	const soundObserver = new EventObserver();
 	soundObserver.subscribe((sound: IAudioFile) => {
 		player.sound = sound;
-		playerName.textContent = sound.name;
+		player.info.trackName.textContent = sound.name;
 		progressEnd.textContent = sound.duration.toString();
 	});
 
