@@ -1,7 +1,6 @@
 import '@/css/style.scss';
 import AudioPlayer from './components/AudioPlayer';
 import Playlist from './components/Playlist';
-import Render from './components/Render';
 import IAudioFile from './interfaces/IAudioFile';
 import EventObserver from './libs/EventObserver';
 import { duration } from './utils/audio';
@@ -15,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const progressBar = document.querySelector('.js-progress-bar') as HTMLDivElement;
 	const progressEnd = document.querySelector('.js-progress-end') as HTMLDivElement;
 
-	const playlist = new Playlist();
-	const render = new Render(playlistElement);
+	const playlist = new Playlist(playlistElement);
 	const player = new AudioPlayer(audioElement, {
 		playButton: document.querySelector('.js-player-play') as HTMLButtonElement,
 		pauseButton: document.querySelector('.js-player-pause') as HTMLButtonElement,
@@ -52,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 
 		Promise.all(promises).then(() => {
-			render.update(playlist.list);
+			playlist.render();
 		});
 	});
 
@@ -70,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (target.classList.contains('js-remove-track')) {
 			const parent = target.closest('[data-audio-id]') as HTMLElement;
 			playlist.remove(parent.dataset.audioId);
-			render.update(playlist.list);
+			playlist.render();
 		}
 	});
 
