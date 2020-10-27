@@ -11,28 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	const audioElement = document.querySelector('.js-player') as HTMLAudioElement;
 	const playlistElement = document.querySelector('.js-playlist') as HTMLDivElement;
 
-	const progressBar = document.querySelector('.js-progress-bar') as HTMLDivElement;
-	const progressEnd = document.querySelector('.js-progress-end') as HTMLDivElement;
-
 	const playlist = new Playlist(playlistElement);
-	// const player = new AudioPlayer(audioElement, {
-	// 	playButton: document.querySelector('.js-player-play') as HTMLButtonElement,
-	// 	pauseButton: document.querySelector('.js-player-pause') as HTMLButtonElement,
-	// 	stopButton: document.querySelector('.js-player-stop') as HTMLButtonElement,
-	// 	prevButton: document.querySelector('.js-player-prev') as HTMLButtonElement,
-	// 	nextButton: document.querySelector('.js-player-next') as HTMLButtonElement
-	// }, {
-	// 	trackName: document.querySelector('.js-player-name') as HTMLSpanElement
-	// });
-
 	const player = new AudioPlayer(audioElement);
-
-	player.render();
 
 	const soundObserver = new EventObserver();
 	soundObserver.subscribe((sound: IAudioFile) => {
 		player.sound = sound;
-		// progressEnd.textContent = sound.duration.toString();
 	});
 
 
