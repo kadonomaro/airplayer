@@ -2,7 +2,7 @@ import IAudioFile from '../interfaces/IAudioFile';
 
 export default class Playlist {
 	list: Array<IAudioFile> = [];
-	private root: HTMLElement
+	private root: HTMLElement;
 	private _current: IAudioFile;
 	private index: number;
 
@@ -52,6 +52,6 @@ export default class Playlist {
 			</li>
 			`
 		}).join('');
-		this.root.innerHTML = items;
+		this.root.innerHTML = `<ul class="playlist__list">${items}</ul>`;
 	}
 }
