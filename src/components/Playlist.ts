@@ -1,4 +1,5 @@
 import IAudioFile from '../interfaces/IAudioFile';
+import { convertSecondsToMinutes } from '../utils/audio';
 
 export default class Playlist {
 	list: Array<IAudioFile> = [];
@@ -44,7 +45,7 @@ export default class Playlist {
 			<li class="playlist__item">
 				<div class="playlist-item" data-audio-id="${item.id}">
 					<span class="playlist-item__name">${item.name}</span>
-					<span class="playlist-item__duration">${item.duration}</span>
+					<span class="playlist-item__duration">${convertSecondsToMinutes(+item.duration)}</span>
 					<div class="playlist-item__controls">
 						<button class="js-remove-track">Remove</button>
 					</div>

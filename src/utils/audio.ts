@@ -4,7 +4,7 @@ export function duration(file: File): Promise<string> {
     audio.src = urlObj;
     return new Promise((resolve) => {
         audio.addEventListener('loadedmetadata', function(){
-            resolve(convertSecondsToMinutes(+audio.duration.toFixed()));
+            resolve(audio.duration.toFixed());
             URL.revokeObjectURL(urlObj);
         });
     });

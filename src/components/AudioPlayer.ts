@@ -1,6 +1,6 @@
 import IAudioFile from "../interfaces/IAudioFile";
 
-interface IControls {
+interface IPlayerControls {
 	play: HTMLButtonElement,
 	pause: HTMLButtonElement,
 	stop: HTMLButtonElement,
@@ -8,11 +8,19 @@ interface IControls {
 	next: HTMLButtonElement
 }
 
+interface IPlayerInfo {
+	track: HTMLElement,
+	start: HTMLElement,
+	end: HTMLElement,
+	time: HTMLElement
+}
+
 export default class AudioPlayer {
 	private root: HTMLElement;
 	private audio: HTMLAudioElement;
 	private _sound: IAudioFile | null;
-	private controls: IControls;
+	private controls: IPlayerControls;
+	private info: IPlayerInfo;
 
 	constructor(root: HTMLElement) {
 		this.root = root;
@@ -26,6 +34,12 @@ export default class AudioPlayer {
 			prev: this.root.querySelector('[data-player-prev]') as HTMLButtonElement,
 			next: this.root.querySelector('[data-player-next]') as HTMLButtonElement
 		};
+		this.info = {
+			track: this.root.querySelector('[data-player-track-name]') as HTMLElement,
+			start: this.root.querySelector('[data-player-track-start]') as HTMLElement,
+			end: this.root.querySelector('[data-player-track-end]') as HTMLElement,
+			time: this.root.querySelector('[data-player-track-time]') as HTMLElement
+		}
 		this.setup();
 	}
 
@@ -44,11 +58,21 @@ export default class AudioPlayer {
 	set sound(sound: IAudioFile | null) {
 		this._sound = sound;
 		this.audio.src = this._sound?.src!;
+		this.info.time.style.width = '0%';
+		this.info.track.textContent = this._sound?.name || this.info.track.textContent;
+		this.info.end.textContent = this.sound?.duration.toString() || '';
 	}
 
 	play() {
 		if (this._sound?.src) {
 			this.audio.play();
+			const interval = setInterval(() => {
+				this.info.time.style.width = Math.ceil((100 / this._sound?.duration * this.audio.currentTime)).toString() + '%';
+			}, 1000);
+
+			this.audio.addEventListener('ended', () => {
+				clearInterval(interval);
+			});
 		}
 	}
 
@@ -77,10 +101,10 @@ export default class AudioPlayer {
 		this.root.innerHTML =  `
 			<div class="player__progress">
 					<div class="progress">
-						<div class="progress__bar js-progress-bar"></div>
+						<div class="progress__bar" data-player-track-time></div>
 						<div class="progress__info">
-							<span class="progress__start">0</span>
-							<span class="progress__end js-progress-end">3</span>
+							<span class="progress__start" data-player-track-start>0</span>
+							<span class="progress__end" data-player-track-end>3</span>
 						</div>
 					</div>
 			</div>
@@ -93,7 +117,7 @@ export default class AudioPlayer {
 						<button class="button button--next player__button" data-player-next></button>
 				</div>
 				<div class="player__info player__col">
-						<span class="player__name" data-player-track>Название трека</span>
+						<span class="player__name" data-player-track-name>Название трека</span>
 				</div>
 			</div>
 		`
